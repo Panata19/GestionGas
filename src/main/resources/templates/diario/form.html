@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: frgHead">
+</head>
+
+<body id="page-top">
+	<div id="wrapper">
+
+		<ul th:replace="Layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="Layout :: frgNavbar"></nav>
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">Control Diario</h1>
+
+					<form class="user" th:action="@{/diario/save}"
+						th:object="${diario}" method="post">
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Cami&oacute;n GH</label>
+
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{hg_cantidad}" id="exampleLastName" required>
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cilindros llenos</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{hg_llenos}" id="exampleLastName" required>
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Cami&oacute;n GD</label>
+
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{gd_cantidad}" id="exampleLastName" required>
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cilindros llenos</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{gd_llenos}" id="exampleLastName" required>
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Cami&oacute;n FC</label>
+
+							</div>
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user "
+									th:field="*{fc_cantidad}" id="exampleLastName"
+									th:placeholder="Cantidad" required>
+							</div>
+
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cilindros Llenos</label> <input
+									type="number" class="form-control form-control-user "
+									th:field="*{fc_llenos}" id="exampleLastName"
+									placeholder="Llenos" required>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Cilindro Inoperativo</label>
+
+							</div>
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user "
+									th:field="*{inoperativos_cantidad}" id="exampleLastName"
+									th:placeholder="Cantidad" required>
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Cilindros industriales</label>
+
+							</div>
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user "
+									th:field="*{industriales_cantidad}" id="exampleLastName"
+									th:placeholder="Cantidad" required>
+							</div>
+
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cilindros Llenos</label> <input
+									type="number" class="form-control form-control-user "
+									th:field="*{industriales_llenos}" id="exampleLastName"
+									placeholder="Llenos" required>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Bodega Lago Agrio</label>
+
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{lago_cantidad}" id="exampleLastName" required>
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cilindros llenos</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{lago_llenos}" id="exampleLastName" required>
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Bodega Gral Farfan</label>
+
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{farfan_cantidad}" id="exampleLastName" required>
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cilindros llenos</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{farfan_llenos}" id="exampleLastName" required>
+							</div>
+						</div>
+<!-- Aquí puedes escribir tu comentario 
+						<div class="form-group row">
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Nombre</label> <input type="text"
+									class="form-control form-control-user"
+									th:field="*{adicional1_nombre}" id="exampleLastName"
+									placeholder="Nombre">
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{adicional1_cant}" id="exampleLastName" >
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Nombre</label> <input type="text"
+									class="form-control form-control-user"
+									th:field="*{adicional2_nombre}" id="exampleLastName"
+									placeholder="Nombre">
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{adicional2_cant}" id="exampleLastName">
+							</div>
+
+						</div>
+
+						<div class="form-group row">
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Nombre</label> <input type="text"
+									class="form-control form-control-user"
+									th:field="*{adicional3_nombre}" id="exampleLastName"
+									placeholder="Nombre">
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{adicional3_cant}" id="exampleLastName" >
+							</div>
+
+						</div>
+
+-->
+
+
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Rosita</label>
+
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{rosita_cantidad}" id="exampleLastName" required>
+							</div>
+							<div class="col-sm-6">
+								<label style="color: #004C99;">Observaciones </label> <input
+									type="text" class="form-control form-control-user"
+									th:field="*{rosita_observacion}" id="exampleLastName"
+									placeholder="Observaciones">
+							</div>
+						</div>
+
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Leoncio</label>
+
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{leoncio_cantidad}" id="exampleLastName" required>
+							</div>
+							<div class="col-sm-6">
+
+								<label style="color: #004C99;">Observaciones</label> <input
+									type="text" class="form-control form-control-user"
+									th:field="*{leoncio_observacion}" id="exampleLastName"
+									placeholder="Observaciones">
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label style="color: #CC0000;"> Leonardo</label>
+
+							</div>
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{leonardo_cantidad}" id="exampleLastName" required>
+							</div>
+							<div class="col-sm-6">
+
+								<label style="color: #004C99;">Observaciones</label> <input
+									type="text" class="form-control form-control-user"
+									th:field="*{leonordo_observacion}" placeholder="Observaciones"
+									id="exampleLastName">
+							</div>
+						</div>
+<!-- Aquí puedes escribir tu comentario 
+						<div class="form-group row">
+
+							<div class="col-sm-6">
+
+								<label style="color: #004C99;">Nombre</label> <input type="text"
+									class="form-control form-control-user"
+									th:field="*{jaramillo_observacion}" id="exampleLastName"
+									placeholder="Nombre">
+							</div>
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{jaramillo_cantidad}" id="exampleLastName" >
+							</div>
+
+						</div>
+
+
+						<div class="form-group row">
+
+							<div class="col-sm-6">
+								<label style="color: #004C99;">Nombre</label> <input type="text"
+									class="form-control form-control-user"
+									th:field="*{silvia_observacion}" id="exampleLastName"
+									placeholder="Nombre">
+							</div>
+
+							<div class="col-sm-4">
+								<label style="color: #004C99;">Cantidad</label> <input
+									type="number" class="form-control form-control-user"
+									th:field="*{silvia_cantidad}" id="exampleLastName" >
+							</div>
+
+						</div> -->
+						
+
+							<div class="col-sm-10">
+								<label style="color: #004C99;">Nota 1</label> <input type="text"
+									class="form-control form-control-user"
+									th:field="*{nota1}" id="exampleLastName"
+									placeholder="nota 1">
+							</div>
+							<div class="col-sm-10">
+								<label style="color: #004C99;">Nota 2</label> <input type="text"
+									class="form-control form-control-user"
+									th:field="*{nota2}" id="exampleLastName"
+									placeholder="nota 2">
+							</div>
+							<div class="col-sm-10">
+								<label style="color: #004C99;">Nota 3</label> <input type="text"
+									class="form-control form-control-user"
+									th:field="*{nota3}" id="exampleLastName"
+									placeholder="nota 3">
+							</div>
+
+
+						
+
+
+
+						<input type="submit" class="btn btn-success btn-user btn-block"
+							value="Guardar" />
+						<hr>
+
+					</form>
+
+				</div>
+
+			</div>
+
+
+
+		</div>
+
+
+	</div>
+
+	<footer th:replace="Layout :: frgFooter"> </footer>
+
+
+</body>
+</html>

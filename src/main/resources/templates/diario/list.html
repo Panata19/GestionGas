@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: frgHead">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+</head>
+
+<body id="page-top">
+	<div id="wrapper">
+
+		<ul th:replace="Layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="Layout :: frgNavbar"></nav>
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">Control Diario</h1>
+					<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>Fecha</th>
+								<th>Total Ubicaci&oacute;n</th>
+								<th>Total Due&ntilde;os</th>
+
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr id="celda1" th:each="i : ${diario}">
+
+
+
+								
+								<td><a class="btn btn-sm btn-primary"
+									th:href="@{/diario/retrieve/} + ${i.idDiario}" th:text="${i.fechaDiario()}"></a></td>
+								
+								<td th:text="${i.TotalUbicacion()}"></td>
+								<td th:text="${i.TotalDuenos()}"></td>
+
+							</tr>
+						</tbody>
+					</table>
+					</div>
+				</div>
+
+			</div>
+
+			<footer th:replace="Layout :: frgFooter"> </footer>
+
+		</div>
+
+	</div>
+
+
+
+
+
+</body>
+</html>
