@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: frgHead">
+</head>
+
+<body id="page-top">
+	<div id="wrapper">
+
+		<ul th:replace="Layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="Layout :: frgNavbar"></nav>
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">Control Diario</h1>
+
+					  <div class="text-center">
+                        <div class="mx-auto" data-text="ERROR">ERROR</div>
+                        
+                        <p class="lead text-gray-800 mb-5">Ya existe un registro con la fecha de hoy</p>
+                        <a href="/diario/list" class="text-gray-500 mb-0">Revisa el Historial CD</a>
+                       
+                        
+                    </div>
+				</div>
+
+			</div>
+
+
+
+		</div>
+
+
+	</div>
+
+	<footer th:replace="Layout :: frgFooter"> </footer>
+
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: frgHead">
+</head>
+
+<body id="page-top">
+	<div id="wrapper">
+
+		<ul th:replace="Layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="Layout :: frgNavbar"></nav>
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">Registro cilindro prestados</h1>
+
+					<form class="user" th:action="@{/prestado/save}"
+						th:object="${prestado}" method="post">
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label> Responsable</label>
+
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control form-control-user "
+									th:field="*{responsable}" id="exampleLastName" required>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label> Fecha</label>
+
+							</div>
+							<div class="col-sm-6">
+								<input type="date" class="form-control form-control-user"
+									th:field="*{fecha_prestado}" id="exampleLastName" required>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label> Cantidad</label>
+
+							</div>
+							<div class="col-sm-6">
+								<input type="number" class="form-control form-control-user"
+									th:field="*{cantidad}" id="exampleLastName" required>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label> Tipo</label>
+
+							</div>
+							<div class="col-sm-6">
+								<select class="form-control " th:field="*{tipo}">
+									<option value=1>15 kg</option>
+									<option value=2>45 kg</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label> Observaciones</label>
+
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control form-control-user"
+									th:field="*{observaciones}" id="exampleLastName" >
+							</div>
+						</div>
+
+						<input type="submit" class="btn btn-success btn-user btn-block"
+							value="Guardar" />
+						<hr>
+
+					</form>
+
+				</div>
+
+			</div>
+
+			<footer th:replace="Layout :: frgFooter"> </footer>
+
+		</div>
+
+	</div>
+
+
+
+
+</body>
+</html>
