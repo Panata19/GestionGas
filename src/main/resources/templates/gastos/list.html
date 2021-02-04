@@ -49,9 +49,9 @@
 								<td th:text="${i.categoria.nombre}"></td>
 								<td th:text="${i.fechaFormat()}"></td>
 								<td>
-									<a href="#" class="btn btn-danger">
+									<button class="btn btn-danger delete" data-model="gastos" th:data-id="${i.idGastos}">
 										<i class="fas fa-trash"></i>
-									</a>
+									</button>
 								</td>
 
 							</tr>

@@ -43,9 +43,9 @@
 								
 								<td th:text="${i.nombre}"></td>
 								<td>
-									<a href="/categoria/create" class="btn btn-danger">
+									<button class="btn btn-danger delete" data-model="categoria" th:data-id="${i.idCategoria}">
 										<i class="fas fa-trash"></i>
-									</a>
+									</button>
 								</td>
 
 							</tr>
