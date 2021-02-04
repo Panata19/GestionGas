@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: frgHead">
+</head>
+
+<body id="page-top">
+	<div id="wrapper">
+
+		<ul th:replace="Layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="Layout :: frgNavbar"></nav>
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">Registro prestados de 45KG</h1>
+					<table class="table " >
+						<tr>
+								<th style="background-color:red;color:white;">1</th>
+								<th>Prestado</th>
+								<th th:text="${rojo}"></th>
+								
+							</tr>
+							<tr>
+								<th style="background-color:green;color:white;">2</th>
+								<th>Devuelto</th>
+								<th th:text="${verde}"></th>
+								
+							</tr>
+					</table>
+<div class="table-responsive">
+					<table class="table table-hover" id="dataTable" width="100%"
+						cellspacing="0">
+						<thead>
+							<tr>
+								<th>Estao</th>
+								<th>Responsable</th>
+								<th>fech Prestado</th>
+								<th>fech Devuelto</th>
+								<th>Cantidad</th>
+								<th>Observaciones</th>
+								<th>Opc</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="i : ${prestados}">
+
+								<td th:text="${i.activo}"></td>
+								<td th:text="${i.responsable}"></td>
+								<td th:text="${i.fechaPrestado()}"></td>
+								<td th:text="${i.fechaDevuelto()}"></td>
+								<td th:text="${i.cantidad}"></td>
+								<td th:text="${i.observaciones}"></td>
+								<td>
+								<a class="btn btn-sm btn-success"
+								th:href="@{/prestado/update/} + ${i.idPrestados}"> <i class="fas fa-undo-alt"></i></a>
+								
+							</td>
+							</tr>
+						</tbody>
+					</table>
+</div>
+				</div>
+
+			</div>
+
+			<footer th:replace="Layout :: frgFooter"> </footer>
+
+		</div>
+
+	</div>
+	
+	<script >
+
+$(document).ready(function(){ 
+    $('#dataTable td:first-child').each(function(){
+        if($(this).text() ==  1){
+            $(this).css('background','red');
+           
+            
+        }else{
+        	$(this).css('background','green');
+        }
+    });
+});
+
+/*
+<a class="btn btn-sm btn-success"
+th:href="@{/prestado/update/} + ${i.idPrestados}"> <i class="fas fa-undo-alt"></i></a>*/
+</script>
+	
+
+
+
+
+</body>
+</html>
