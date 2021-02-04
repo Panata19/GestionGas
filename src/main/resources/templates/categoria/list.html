@@ -1,10 +1,70 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: frgHead">
+
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
 </head>
-<body>
+
+<body id="page-top">
+	<div id="wrapper">
+
+		<ul th:replace="Layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="Layout :: frgNavbar"></nav>
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800">
+						Categorías
+						<a href="/categoria/create" class="btn btn-primary">
+							Nueva categoría
+						</a>
+					</h1>
+					
+					<div class="table-responsive">
+					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Nombre</th>
+								<th>Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="i : ${categorias}">
+								<td th:text="${i.idCategoria}"></td>
+								
+								<td th:text="${i.nombre}"></td>
+								<td>
+									<a href="/categoria/create" class="btn btn-danger">
+										<i class="fas fa-trash"></i>
+									</a>
+								</td>
+
+							</tr>
+						</tbody>
+					</table>
+					</div>
+				</div>
+
+			</div>
+
+			<footer th:replace="Layout :: frgFooter"> </footer>
+
+		</div>
+
+	</div>
+
+
+
+
 
 </body>
 </html>

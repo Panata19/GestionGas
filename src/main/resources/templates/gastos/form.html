@@ -1,10 +1,86 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: frgHead">
 </head>
-<body>
+
+<body id="page-top">
+	<div id="wrapper">
+
+		<ul th:replace="Layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="Layout :: frgNavbar"></nav>
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800" th:text="*{title}"></h1>
+
+					<form class="user" th:action="@{/gastos/save}"
+						th:object="${gastos}" method="post">
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label>Nombre</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="text" class="form-control form-control-user "
+									th:field="*{nombre}" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label>Cantidad</label>
+							</div>
+							<div class="col-sm-6">
+								<input type="number" step="0.1" class="form-control form-control-user " th:field="*{cantidad}" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label>Fecha</label>
+
+							</div>
+							<div class="col-sm-6">
+								<input type="date" class="form-control form-control-user"
+									th:field="*{fecha}" required>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<label>Categorías</label>
+							</div>
+							<div class="col-sm-6">
+								<select th:field="*{idCategoria}" class="form-control">
+									<option value="">Seleccione una categoría...</option>
+									<option th:each="cat : ${categorias}" 
+											th:value="${cat.idCategoria}" 
+											th:text="${cat.nombre}" 
+											>Seleccione...</option>
+								</select>
+							</div>
+						</div>
+
+						<input type="submit" class="btn btn-success btn-user btn-block"
+							value="Guardar" />
+						<hr>
+
+					</form>
+
+				</div>
+
+			</div>
+
+			<footer th:replace="Layout :: frgFooter"> </footer>
+
+		</div>
+
+	</div>
+
+
+
 
 </body>
 </html>

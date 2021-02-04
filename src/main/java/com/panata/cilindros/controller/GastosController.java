@@ -11,11 +11,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.panata.cilindros.entity.Categoria;
 import com.panata.cilindros.entity.Gastos;
+import com.panata.cilindros.service.ICategoriaService;
 import com.panata.cilindros.service.IGastosService;
 
 @Controller
@@ -26,10 +29,15 @@ public class GastosController {
 	@Autowired 
 	private IGastosService srvGastos;
 	
+	@Autowired 
+	private ICategoriaService srvCategoria;
+	
 	@GetMapping(value="/create") //https://localhost:8080/area/create
 	public String create(Model model) {
 		Gastos gastos = new Gastos();
+		List<Categoria> categorias = srvCategoria.findAll();
 		
+		model.addAttribute("categorias", categorias);
 		model.addAttribute("title", "Nuevo registro de Gastos");
 		model.addAttribute("gastos", gastos); //similar al ViewBag // Se agrega a Session
 		return "gastos/form"; //la ubicación de la vista
@@ -73,6 +81,7 @@ public class GastosController {
 	public String listpedidos(Model model) {
 		
 		List<Gastos> gastos = srvGastos.findAll();
+
 		model.addAttribute("gastos", gastos);
 		model.addAttribute("title", "Listado de Gastoss");
 		return "gastos/list";
@@ -84,7 +93,7 @@ public class GastosController {
 			
 			SessionStatus status, RedirectAttributes flash) {
 		try {
-			
+			Categoria categoria = srvCategoria.findById(gastos.getIdCategoria());
 			String message = "Gastos agregado correctamente";
 			String titulo = "Nueva Gastos";
 			
@@ -92,19 +101,28 @@ public class GastosController {
 				message = "Gastos actualizada correctamente";
 				titulo = "Actualizado correctamente";
 			}
-						
-			if(result.hasErrors()) {
-				model.addAttribute("title", titulo);							
-				return "gastos/form";				
+			
+			if(categoria == null) {
+				flash.addFlashAttribute("error", "No se ha encontrado la categoria");
+				return "redirect:/gastos/createe";
 			}
 						
-
+			if(result.hasErrors()) {
+				model.addAttribute("title", titulo);	
+				System.out.println(result.getAllErrors());
+				return "gastos/form";				
+			}
+					
+			
+			gastos.setCategoria(categoria);
 			srvGastos.save(gastos);	
 			status.setComplete();
 			flash.addFlashAttribute("success", message);
 		}
 		catch(Exception ex) {
 			flash.addFlashAttribute("error", ex.getMessage());
+			ex.printStackTrace();
+			return "redirect:/gastos/create3";
 		}				
 		return "redirect:/gastos/list";
 	}	

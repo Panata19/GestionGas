@@ -1,6 +1,7 @@
 package com.panata.cilindros.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.persistence.Basic;
@@ -13,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.Transient;
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "gastos")
 public class Gastos implements Serializable {
@@ -24,7 +28,7 @@ public class Gastos implements Serializable {
 	
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Basic(optional = false)
 	@Column(name = "pk_gastos")
 	private Integer idGastos;
@@ -32,6 +36,7 @@ public class Gastos implements Serializable {
 	@Column(name = "nombre")
 	private String Nombre;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	@Column(name = "fecha")
 	private Calendar Fecha;
 	
@@ -41,6 +46,17 @@ public class Gastos implements Serializable {
 	@JoinColumn(name="fk_categoria", referencedColumnName="pk_categoria")
 	@ManyToOne
 	private Categoria categoria;
+	
+	@Transient
+	private Integer idCategoria;
+
+	public Integer getIdCategoria() {
+		return idCategoria;
+	}
+
+	public void setIdCategoria(Integer idCategoria) {
+		this.idCategoria = idCategoria;
+	}
 
 	public Gastos() {
 		super();
@@ -94,7 +110,9 @@ public class Gastos implements Serializable {
 	}
 	
 	
-	
-	
-	
+	public String fechaFormat() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");		
+		return sdf.format(this.Fecha.getTime());
+	}
+
 }

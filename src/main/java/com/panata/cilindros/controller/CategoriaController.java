@@ -72,9 +72,9 @@ public class CategoriaController {
 	
 	@GetMapping(value={"/list"})
 	public String listpedidos(Model model) {
-		List<Categoria> categoria = srvCategoria.findAll();
+		List<Categoria> categorias = srvCategoria.findAll();
 		
-		model.addAttribute("categoria", categoria);
+		model.addAttribute("categorias", categorias);
 		model.addAttribute("title", "Listado de Categorias");
 		return "categoria/list";
 	}
@@ -106,6 +106,8 @@ public class CategoriaController {
 		}
 		catch(Exception ex) {
 			flash.addFlashAttribute("error", ex.getMessage());
+			ex.printStackTrace();
+			return "redirect:/categoria/create";
 		}				
 		return "redirect:/categoria/list";
 	}	
