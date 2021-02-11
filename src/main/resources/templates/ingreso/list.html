@@ -22,9 +22,9 @@
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-4 text-gray-800">
-						Gastos
-						<a href="/gastos/create" class="btn btn-primary">
-							Nuevo gasto
+						Ingresos
+						<a href="/ingreso/create" class="btn btn-success">
+							Nuevo Ingreso
 						</a>
 					</h1>
 					
@@ -33,23 +33,19 @@
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Nombre</th>
 								<th>Cantidad</th>
-								<th>Categoría</th>
 								<th>Fecha</th>
 								<th>Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr th:each="i : ${gastos}">
-								<td th:text="${i.idGastos}"></td>
+							<tr th:each="i : ${ingresos}">
+								<td th:text="${i.idIngreso}"></td>
 								
-								<td th:text="${i.nombre}"></td>
 								<td th:text="${i.cantidad}"></td>
-								<td th:text="${i.categoria.nombre}"></td>
 								<td th:text="${i.fechaFormat()}"></td>
 								<td>
-									<button class="btn btn-danger delete" data-model="gastos" th:data-id="${i.idGastos}">
+									<button class="btn btn-danger delete" data-model="ingreso" th:data-id="${i.idIngreso}">
 										<i class="fas fa-trash"></i>
 									</button>
 								</td>

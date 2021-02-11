@@ -73,7 +73,7 @@ public class IngresosController {
 	public String listpedidos(Model model) {
 		
 		List<Ingreso> ingreso = srvIngreso.findAll();
-		model.addAttribute("ingreso", ingreso);
+		model.addAttribute("ingresos", ingreso);
 		model.addAttribute("title", "Listado de Ingresos");
 		return "ingreso/list";
 	}
@@ -107,7 +107,7 @@ public class IngresosController {
 			flash.addFlashAttribute("error", ex.getMessage());
 			ex.printStackTrace();
 		}				
-		return "redirect:/gastos/list";
+		return "redirect:/ingreso/list";
 	}	
 
       

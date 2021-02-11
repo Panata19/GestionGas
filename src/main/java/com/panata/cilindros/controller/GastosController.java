@@ -96,6 +96,7 @@ public class GastosController {
 			Categoria categoria = srvCategoria.findById(gastos.getIdCategoria());
 			String message = "Gastos agregado correctamente";
 			String titulo = "Nueva Gastos";
+			List<Categoria> categorias = srvCategoria.findAll();
 			
 			if(gastos.getIdGastos() != null) {
 				message = "Gastos actualizada correctamente";
@@ -104,11 +105,12 @@ public class GastosController {
 			
 			if(categoria == null) {
 				flash.addFlashAttribute("error", "No se ha encontrado la categoria");
-				return "redirect:/gastos/createe";
+				return "redirect:/gastos/create";
 			}
 						
 			if(result.hasErrors()) {
 				model.addAttribute("title", titulo);	
+				model.addAttribute("categorias", categorias);
 				System.out.println(result.getAllErrors());
 				return "gastos/form";				
 			}
