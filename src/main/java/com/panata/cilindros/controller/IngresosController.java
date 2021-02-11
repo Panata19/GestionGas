@@ -94,7 +94,7 @@ public class IngresosController {
 			}
 						
 			if(result.hasErrors()) {
-				model.addAttribute("title", titulo);							
+				model.addAttribute("title", result.toString());							
 				return "ingreso/form";				
 			}
 						
@@ -105,8 +105,9 @@ public class IngresosController {
 		}
 		catch(Exception ex) {
 			flash.addFlashAttribute("error", ex.getMessage());
+			ex.printStackTrace();
 		}				
-		return "redirect:/ingreso/list";
+		return "redirect:/gastos/list";
 	}	
 
       

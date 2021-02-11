@@ -1,10 +1,85 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="Layout :: frgHead">
 </head>
-<body>
+
+<body id="page-top">
+	<div id="wrapper">
+
+		<ul th:replace="Layout :: frgSideBar"></ul>
+
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<div id="content">
+
+				<nav th:replace="Layout :: frgNavbar"></nav>
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-4 text-gray-800" th:text="*{title}"></h1>
+
+					<form class="user" th:action="@{/ingreso/save}"
+						th:object="${ingreso}" method="post">
+					
+						<div class="form-group row">
+							<div class="col-sm-2">
+								
+								<h1 class="h4 mb-4 text-gray-800" >Cantidad</h1>
+							</div>
+						
+							<div class="col-sm-6">
+								<input type="number" step="0.1" class="form-control form-control-user " th:field="*{cantidad}" required>
+							</div>
+						
+					
+							</div>
+						
+						
+						
+						<div class="form-group row">
+							<div class="col-sm-2">
+								<h1 class="h4 mb-4 text-gray-800" >Fecha:</h1>
+
+							</div>
+							<div class="col-sm-6">
+								<input type="date" id="fechaActual" class="form-control form-control-user" th:field="*{fecha}"  value="" required >
+							</div>
+						</div>
+					
+
+						<input type="submit" class="btn btn-success "
+							value="Guardar" />
+						<hr>
+
+					</form>
+
+				</div>
+
+			</div>
+
+			<footer th:replace="Layout :: frgFooter"> </footer>
+
+		</div>
+
+	</div>
+
+
+<script>
+window.onload = function(){
+	  var fecha = new Date(); //Fecha actual
+	  var mes = fecha.getMonth()+1; //obteniendo mes
+	  var dia = fecha.getDate(); //obteniendo dia
+	  var ano = fecha.getFullYear(); //obteniendo año
+	  if(dia<10)
+	    dia='0'+dia; //agrega cero si el menor de 10
+	  if(mes<10)
+	    mes='0'+mes //agrega cero si el menor de 10
+	  document.getElementById('fechaActual').value=ano+"-"+mes+"-"+dia;
+	}
+
+</script>
+
 
 </body>
 </html>

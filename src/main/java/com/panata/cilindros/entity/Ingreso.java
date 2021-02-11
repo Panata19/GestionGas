@@ -1,6 +1,7 @@
 package com.panata.cilindros.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import javax.persistence.Basic;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "ingreso")
@@ -28,6 +31,7 @@ public class Ingreso implements Serializable {
 	private Integer idIngreso;
 	
 	@Column(name = "fecha")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	private Calendar Fecha;
 	
 	@Column(name = "cantidad")
@@ -76,7 +80,10 @@ public class Ingreso implements Serializable {
 	}
 	
 	
-	
+	public String fechaFormat() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MMM/yyyy");		
+		return sdf.format(this.Fecha.getTime());
+	}
 	
 	
 
