@@ -48,6 +48,9 @@
 									<button class="btn btn-danger delete" data-model="ingreso" th:data-id="${i.idIngreso}">
 										<i class="fas fa-trash"></i>
 									</button>
+									 <a class="btn btn-info" th:href="@{/ingreso/update/} + ${i.idIngreso}">
+	                                    <i class="fas fa-edit"></i>
+	                                </a>
 								</td>
 
 							</tr>

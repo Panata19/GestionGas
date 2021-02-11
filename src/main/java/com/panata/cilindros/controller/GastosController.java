@@ -55,8 +55,12 @@ public class GastosController {
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Gastos gastos = srvGastos.findById(id);
-		srvGastos.save(gastos);	
-		return "redirect:/gastos/list";
+		List<Categoria> categorias = srvCategoria.findAll();
+		
+		model.addAttribute("categorias", categorias);
+		model.addAttribute("title", "Nuevo registro de Gastos");
+		model.addAttribute("gastos", gastos); //similar al ViewBag // Se agrega a Session
+		return "gastos/form"; //la ubicación de la vista
 	
 	}
 	

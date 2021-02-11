@@ -48,8 +48,9 @@ public class CategoriaController {
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Categoria categoria = srvCategoria.findById(id);
-		srvCategoria.save(categoria);	
-		return "redirect:/categoria/list";
+		model.addAttribute("title", "Nuevo registro de Categoria");
+		model.addAttribute("categoria", categoria);
+		return "categoria/form";
 	
 	}
 	

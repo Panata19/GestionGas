@@ -47,8 +47,9 @@ public class IngresosController {
 	@GetMapping(value="/update/{id}")
 	public String update(@PathVariable(value="id") Integer id, Model model) {
 		Ingreso ingreso = srvIngreso.findById(id);
-		srvIngreso.save(ingreso);	
-		return "redirect:/ingreso/list";
+		model.addAttribute("title", "Actualizar Ingreso");
+		model.addAttribute("ingreso", ingreso);
+		return "ingreso/form";
 	
 	}
 	
