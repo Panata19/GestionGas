@@ -1,5 +1,7 @@
 package com.panata.cilindros.service;
 
+import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +45,41 @@ public class GastosService implements  IGastosService  {
 		
 		return (List<Gastos>) dao.findAll();
 	}
+
+	@Override
+	@Transactional
+	public List<Gastos> findByFecha(String fecha) {
+		// TODO Auto-generated method stub
+		return (List<Gastos>) dao.findByFecha(fecha);
+	}
+
+	@Override
+	@Transactional
+	public Float sumatoriaMensualGastos(String fe_inicial, String fe_final) {
+		
+		Float res = dao.sumatoriaMensualGastos(fe_inicial, fe_final);
+		if (res == null) {
+			
+			res = (float) 0;
+		}
+		
+		return res;
+	}
+
+	@Override
+	@Transactional
+	public Float sumatoriaDiaGastos(String fe_dia) {
+		
+		Float res = dao.sumatoriaDiaGastos(fe_dia);
+		if (res == null) {
+			
+			res = (float) 0;
+		}
+		
+		return res;
+	}
+
+	
+	
 
 }

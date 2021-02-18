@@ -10,5 +10,6 @@ public interface IIngresosService {
 	public Ingreso findById(Integer id);
 	public void delete(Integer id);
 	public List<Ingreso> findAll();
-	
+	public Float sumatoriaMensualIngreso(String  fe_inicial, String  fe_final);
+	public Float sumatoriaDiaIngreso(String  fe_dia);
 }
