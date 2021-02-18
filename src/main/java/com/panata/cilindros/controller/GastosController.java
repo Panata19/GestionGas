@@ -1,6 +1,10 @@
 package com.panata.cilindros.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +24,7 @@ import com.panata.cilindros.entity.Categoria;
 import com.panata.cilindros.entity.Gastos;
 import com.panata.cilindros.service.ICategoriaService;
 import com.panata.cilindros.service.IGastosService;
+import com.panata.cilindros.service.IIngresosService;
 
 @Controller
 @SessionAttributes("gastos")
@@ -28,6 +33,9 @@ public class GastosController {
 	
 	@Autowired 
 	private IGastosService srvGastos;
+	
+	@Autowired 
+	private IIngresosService srvIngreso;
 	
 	@Autowired 
 	private ICategoriaService srvCategoria;
@@ -84,10 +92,35 @@ public class GastosController {
 	@GetMapping(value={"/list"})
 	public String listpedidos(Model model) {
 		
-		List<Gastos> gastos = srvGastos.findAll();
-
+		Calendar diaActual = Calendar.getInstance();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");	
+		List<Gastos> gastos = srvGastos.findByFecha(sdf.format(diaActual.getTime()));
+		List<String> categoria =  new ArrayList<String>();
+		for(Gastos g:gastos) {
+			categoria.add(g.getCategoria().getNombre());
+		}
+		categoria = categoria.stream().distinct().collect(Collectors.toList());
+		
+		
+		
+		Calendar primerDiaMes = Calendar.getInstance();
+		primerDiaMes.set(Calendar.DAY_OF_MONTH, 1);
+		
+		
+		Calendar ultimoDiaMes = Calendar.getInstance();
+		ultimoDiaMes.set(Calendar.DATE, ultimoDiaMes.getActualMaximum(Calendar.DATE));
+				
+		Float gasMensual =srvGastos.sumatoriaMensualGastos(sdf.format(primerDiaMes.getTime()), sdf.format(ultimoDiaMes.getTime()));
+		Float ingMensual =srvIngreso.sumatoriaMensualIngreso(sdf.format(primerDiaMes.getTime()), sdf.format(ultimoDiaMes.getTime()));
+		Float gananciaMensual = ingMensual - gasMensual;  
+		
+		
+		model.addAttribute("categorias", categoria );
 		model.addAttribute("gastos", gastos);
-		model.addAttribute("title", "Listado de Gastoss");
+		model.addAttribute("gastomensual",  gasMensual );
+		model.addAttribute("ingresomensual", ingMensual );
+		model.addAttribute("ganancias", gananciaMensual  );
+	    model.addAttribute("title", "Administración de gatos e ingresos");
 		return "gastos/list";
 	}
 	

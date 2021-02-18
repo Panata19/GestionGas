@@ -108,7 +108,7 @@ public class IngresosController {
 			flash.addFlashAttribute("error", ex.getMessage());
 			ex.printStackTrace();
 		}				
-		return "redirect:/ingreso/list";
+		return "redirect:/gastos/list";
 	}	
 
       

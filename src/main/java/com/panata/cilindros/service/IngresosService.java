@@ -44,5 +44,31 @@ public class IngresosService implements IIngresosService {
 		return (List<Ingreso>) dao.findAll();
 	}
 
+	@Override
+	@Transactional
+	public Float sumatoriaMensualIngreso(String fe_inicial, String fe_final) {
+		
+		
+		Float res = dao.sumatoriaMensualIngreso(fe_inicial, fe_final);
+		if(res == null) {
+			res = (float)0;
+		}
+		
+		return res;
+	}
+
+	@Override
+	@Transactional
+	public Float sumatoriaDiaIngreso(String fe_dia) {
+		
+		Float res = dao.sumatoriaDiaIngreso(fe_dia);
+		if(res == null) {
+			res = (float)0;
+		}
+		
+		return res;
+		
+	}
+
 
 }

@@ -21,46 +21,174 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">
-						Gastos
-						<a href="/gastos/create" class="btn btn-primary">
-							Nuevo gasto
-						</a>
-					</h1>
-					
-					<div class="table-responsive">
-					<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Nombre</th>
-								<th>Cantidad</th>
-								<th>CategorÃ­a</th>
-								<th>Fecha</th>
-								<th>Acciones</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="i : ${gastos}">
-								<td th:text="${i.idGastos}"></td>
-								
-								<td th:text="${i.nombre}"></td>
-								<td th:text="${i.cantidad}"></td>
-								<td th:text="${i.categoria.nombre}"></td>
-								<td th:text="${i.fechaFormat()}"></td>
-								<td>
-									<button class="btn btn-danger delete" data-model="gastos" th:data-id="${i.idGastos}">
-										<i class="fas fa-trash"></i>
-									</button>
-									<a class="btn btn-info" th:href="@{/gastos/update/} + ${i.idGastos}">
-	                                    <i class="fas fa-edit"></i>
-	                                </a>
-								</td>
+					<h1 class="h3 mb-4 text-gray-800" th:text="*{title}"></h1>
 
-							</tr>
-						</tbody>
-					</table>
+					<h1 class="h3 mb-4 text-gray-800">
+
+
+
+
+						<div class="dropdown no-arrow mb-4">
+							<button class="btn btn-success dropdown-toggle" type="button"
+								id="dropdownMenuButton" data-toggle="dropdown"
+								aria-haspopup="true" aria-expanded="false">
+								<i class="fas fa-dollar-sign"></i> Ingreso
+
+							</button>
+							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+								<a class="dropdown-item" href="/ingreso/create">Nuevo</a> <a
+									class="dropdown-item" href="/ingreso/list">administraci&oacute;n</a>
+
+							</div>
+
+							<a href="/gastos/create" class="btn btn-primary"><i
+								class="far fa-money-bill-alt"></i> Nuevo gasto </a> <a
+								href="/categoria/list" class="btn btn-warning"><i
+								class="fas fa-folder"></i> Categoria </a>
+					</h1>
+
+					<div class="row">
+						<!-- card de ingresos -->
+						<div class="col-xl-3 col-md-6 mb-4">
+							<div class="card border-left-success shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div id="divID"
+												class="text-xs font-weight-bold text-success text-uppercase mb-1">
+												Ingresos</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"
+												th:text="'$' + ${ingresomensual}"></div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- 	Card gastos -->
+						<div class="col-xl-3 col-md-6 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div id="divID1"
+												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												Gastos</div>
+
+											<div class="h5 mb-0 font-weight-bold text-gray-800"
+												th:text="'$' + ${gastomensual}"></div>
+										</div>
+										<div class="col-auto">
+
+											<i class="far fa-money-bill-alt fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<!-- Card ganancias -->
+						<div class="col-xl-3 col-md-6 mb-4">
+							<div class="card border-left-warning shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div id="divID2"
+												class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+												Ganancias</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"
+												th:text="'$' + ${ganancias}"></div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-wallet fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
+
+
+					<div class="col-xl-8 col-lg-7">
+
+						<!-- Tablas card -->
+						<div class="card shadow mb-4">
+							<div class="card-header py-3" id="fecAct">
+								<h6 class="m-0 font-weight-bold text-primary" >Informe del
+									d&iacute;a</h6>
+							</div>
+							<div class="card-body">
+
+
+
+
+
+								<div class="table-responsive">
+									<table class="table " id="dataTable">
+										<thead>
+											<tr>
+
+
+											</tr>
+										</thead>
+										<tbody th:each="j : ${categorias}">
+
+
+											<tr bgcolor="#ddd">
+												<td  scope="col" th:text="${j}"></td>
+												<td  scope="col" ></td>
+												<td  scope="col" ></td>
+												<td  scope="col" ></td>
+											</tr>
+								
+
+											<tr th:each="i : ${gastos}"
+												th:if="${i.categoria.nombre == j}">
+
+												<td></td>
+												<td th:text="${i.nombre}"></td>
+												<td th:text="${i.cantidad}"></td>
+												<td>
+													<button class="btn btn-danger btn-circle delete"
+														data-model="gastos" th:data-id="${i.idGastos}">
+														<i class="fas fa-trash"></i>
+													</button> <a class="btn btn-info btn-circle"
+													th:href="@{/gastos/update/} + ${i.idGastos}"> <i
+														class="fas fa-edit"></i>
+												</a>
+												</td>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+
+
+
+
+
+
+
+
+
+
+
+							</div>
+						</div>
+
+
+
+
+					</div>
+
+
+
+
 				</div>
 
 			</div>
@@ -72,7 +200,45 @@
 	</div>
 
 
+	<script>
+	
+	window.onload = function(){
+		var meses = new Array("Enero", "Febrero", "Marzo", "Abril", "Mayo",
+				"Junio", "Julio", "Agosto", "Septiembre", "Octubre",
+				"Noviembre", "Diciembre");
+		var f = new Date();
 
+		var div = document.getElementById('divID');
+		div.innerHTML += " ( " + meses[f.getMonth()] + " )";
+
+		var div = document.getElementById('divID1');
+		div.innerHTML += " ( " + meses[f.getMonth()] + " )";
+
+		var div = document.getElementById('divID2');
+		div.innerHTML += " ( " + meses[f.getMonth()] + " )";
+		
+		 var fecha = new Date(); //Fecha actual
+		  var mes = fecha.getMonth()+1; //obteniendo mes
+		  var dia = fecha.getDate(); //obteniendo dia
+		  var ano = fecha.getFullYear(); //obteniendo año
+		  if(dia<10)
+		    dia='0'+dia; //agrega cero si el menor de 10
+		  if(mes<10)
+		    mes='0'+mes //agrega cero si el menor de 10
+		  
+		
+		var div = document.getElementById('fecAct');
+		div.innerHTML +=  dia+"/"+mes+"/"+ano;
+		
+		
+		
+	}
+</script>
+	
+	
+
+	 
+	
 
 
 </body>

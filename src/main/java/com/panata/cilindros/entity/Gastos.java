@@ -1,6 +1,7 @@
 package com.panata.cilindros.entity;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -37,7 +38,7 @@ public class Gastos implements Serializable {
 	private String Nombre;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")	
-	@Column(name = "fecha")
+	@Column(name = "Fecha")
 	private Calendar Fecha;
 	
 	@Column(name = "cantidad")
