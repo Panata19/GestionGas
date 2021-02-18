@@ -23,10 +23,8 @@
 <link th:href="@{/css/sb-admin-2.min.css}" rel="stylesheet">
 <link th:href="@{/vendor/datatables/dataTables.bootstrap4.min.css}"
 	rel="stylesheet">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/cupertino/jquery-ui.css">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
 
 </head>
 
@@ -214,29 +212,6 @@
 
 			<!-- Footer -->
 			<footer th:fragment="frgFooter" class="sticky-footer bg-white">
-
-				<script type="text/javascript">
-				$(document).ready(function() {    
-				    $('#dataTable').DataTable({
-				    //para cambiar el lenguaje a español
-				        "language": {
-				                "lengthMenu": "Mostrar _MENU_ registros",
-				                "zeroRecords": "No se encontraron resultados",
-				                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-				                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
-				                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
-				                "sSearch": "Buscar:",
-				                "oPaginate": {
-				                    "sFirst": "Primero",
-				                    "sLast":"Último",
-				                    "sNext":"Siguiente",
-				                    "sPrevious": "Anterior"
-							     },
-							     "sProcessing":"Procesando...",
-				            }
-				    });     
-				});
-				</script>
 				
 				<div class="row">
 					<div class="col-12">
@@ -285,6 +260,29 @@
 				<!-- Bootstrap core JavaScript-->
 				<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 				<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+				
+				<script type="text/javascript">
+				$(document).ready(function() {    
+				    $('#dataTable').DataTable({
+				    //para cambiar el lenguaje a español
+				        "language": {
+				                "lengthMenu": "Mostrar _MENU_ registros",
+				                "zeroRecords": "No se encontraron resultados",
+				                "info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+				                "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+				                "infoFiltered": "(filtrado de un total de _MAX_ registros)",
+				                "sSearch": "Buscar:",
+				                "oPaginate": {
+				                    "sFirst": "Primero",
+				                    "sLast":"Último",
+				                    "sNext":"Siguiente",
+				                    "sPrevious": "Anterior"
+							     },
+							     "sProcessing":"Procesando...",
+				            }
+				    });     
+				});
+				</script>
 
 				<!-- Core plugin JavaScript-->
 				<script th:src="@{/vendor/jquery-easing/jquery.easing.min.js}"></script>
@@ -298,6 +296,7 @@
 
 				<!-- Page level custom scripts -->
 				<script th:src="@{/js/demo/datatables-demo.js}"></script>
+				<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 				<script th:src="@{/js/app.js}"></script>
 				
 				

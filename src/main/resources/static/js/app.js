@@ -54,3 +54,9 @@ function eliminar(modelo, id) {
 }
 
 
+$(function() {
+    $(".datepicker").datepicker({
+    	dateFormat: 'yy-mm-dd'
+    });
+});
+
