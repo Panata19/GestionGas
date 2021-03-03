@@ -81,7 +81,6 @@ function eliminar(modelo, id) {
 }
 
 
-
 function report12(fechainicio,fechafin){	
 	
 	console.log(fechainicio,fechafin);
@@ -165,5 +164,12 @@ function report23(fechaInicio,fechaFin){
 }
 
 
+
+
+$(function() {
+    $(".datepicker").datepicker({
+    	dateFormat: 'yy-mm-dd'
+    });
+});
 
 
