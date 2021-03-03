@@ -21,11 +21,10 @@
 				<nav th:replace="Layout :: frgNavbar"></nav>
 
 				<div class="container-fluid">
-
 					<!-- Page Heading -->
 				
 					<form th:object="${diario}" method="post">
-							<h1 class="h3 mb-4 text-gray-800" th:text="*{fechaDiario()}"></h1>
+							<h1 class="h3 mb-4 text-gray-800" th:text="'Control diario de: ' +*{fechaDiario()}"></h1>
 						<table class="table table-striped"  cellspacing="0">
 							<thead>
 								<tr>

@@ -79,6 +79,13 @@ public class GastosService implements  IGastosService  {
 		return res;
 	}
 
+	@Override
+	@Transactional
+	public List<Gastos> findGastosFiniFfin(String fe_inicial, String fe_final) {
+		// TODO Auto-generated method stub
+		return (List<Gastos>) dao.findGastosFiniFfin(fe_inicial, fe_final);
+	}
+
 	
 	
 

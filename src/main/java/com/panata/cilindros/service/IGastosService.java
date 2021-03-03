@@ -15,4 +15,6 @@ public interface IGastosService {
 	public List<Gastos> findByFecha(String fecha);
 	public Float sumatoriaMensualGastos(String  fe_inicial, String  fe_final);
 	public Float sumatoriaDiaGastos(String  fe_dia );
+	public List<Gastos> findGastosFiniFfin(String  fe_inicial, String  fe_final);
+	
 }

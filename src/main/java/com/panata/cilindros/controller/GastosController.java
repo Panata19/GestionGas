@@ -16,15 +16,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.panata.cilindros.entity.Categoria;
 import com.panata.cilindros.entity.Gastos;
+import com.panata.cilindros.reporting.RptCategoriaGastos;
 import com.panata.cilindros.service.ICategoriaService;
 import com.panata.cilindros.service.IGastosService;
 import com.panata.cilindros.service.IIngresosService;
+
 
 @Controller
 @SessionAttributes("gastos")
@@ -120,7 +123,7 @@ public class GastosController {
 		model.addAttribute("gastomensual",  gasMensual );
 		model.addAttribute("ingresomensual", ingMensual );
 		model.addAttribute("ganancias", gananciaMensual  );
-	    model.addAttribute("title", "Administración de gatos e ingresos");
+	    model.addAttribute("title", "Administración de gastos e ingresos");
 		return "gastos/list";
 	}
 	
@@ -166,6 +169,53 @@ public class GastosController {
 		return "redirect:/gastos/list";
 	}	
 
+	@GetMapping(value = "/reporte")
+	public String rptGastosCategorias(Model model) {
+		return "gastos/reporte";			
+	}
+	
+	@GetMapping(value = "/todasGastos/{fecha1}/{fecha2}", produces="application/json")
+	public @ResponseBody List<RptCategoriaGastos> todasGastos(@PathVariable(value="fecha1") String fecha1,@PathVariable(value="fecha2") String fecha2, Model model) {				
+		try {	
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");	
+			List<Gastos> gastos = srvGastos.findGastosFiniFfin(fecha1,fecha2);
+			List<String> categoria =  new ArrayList<String>();
+			List<RptCategoriaGastos> reporte = new ArrayList<RptCategoriaGastos>();
+			Float sumatoria=(float) 0;
+			
+			
+			
+			
+			for(Gastos g:gastos) {
+				categoria.add(g.getCategoria().getNombre());
+			}
+			categoria = categoria.stream().distinct().collect(Collectors.toList());
+			
+			//gastos de con la categoria resprectiva 
+			
+			for(String g:categoria) {
+				sumatoria=(float) 0;
+				for(int i=0 ; i<gastos.size();i++) {
+					if(g==gastos.get(i).getCategoria().getNombre()) {
+						sumatoria=sumatoria+gastos.get(i).getCantidad();
+					}	
+				}
+				
+				RptCategoriaGastos datos = new RptCategoriaGastos();
+				datos.setCategoria(g);
+				datos.setGasto(sumatoria);
+				reporte.add(datos);
+				
+			}
+			return reporte;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}		
+	}
+	
+	
 	
 	
 
