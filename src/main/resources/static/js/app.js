@@ -26,8 +26,9 @@ $(document).ready(function() {
   	  fechaInicio = $("#fechaInicio").val();
   	  fechaFin  = $("#fechaFin").val();
   	  console.log(fechaInicio,fechaFin);
-  	  report12(fechaInicio,fechaFin)
-  	  report23(fechaInicio,fechaFin)
+  	 // report12(fechaInicio,fechaFin);
+  	  // report23(fechaInicio,fechaFin,0);
+  	  report23(fechaInicio,fechaFin);
   		
   		
   	});
@@ -119,48 +120,59 @@ function report23(fechaInicio,fechaFin){
 
 	var color = Chart.helpers.color;
 
-	
-	var  gastos = report12(fechaInicio,fechaFin);
 	var colores12 = [];
 	var numero12 = [];
 	var etiqueta12 = [];
-
-	drawGastos(gastos);
-
-	for(var i in gastos){
-		colores12.push(getRandomColor());
-		numero12.push(gastos[i].gasto);
-		etiqueta12.push(gastos[i].categoria);
-		
-	}
 	
-	console.log(colores12)
-	console.log(numero12)
-	console.log(etiqueta12)
 	
+		var  gastos = report12(fechaInicio,fechaFin);
+		console.log(gastos);
+		for(var i in gastos){
+			colores12.push(getRandomColor());
+			numero12.push(gastos[i].gasto);
+			etiqueta12.push(gastos[i].categoria);
+		}
+		console.log(colores12);
+		console.log(numero12);
+		console.log(etiqueta12);
+	
+
+	
+	var config = {
+			type: 'pie',
+			data:  {
+				datasets: [{
+					data: numero12,
+					backgroundColor: colores12,
+					label: 'Dataset 1'
+				}],
+				labels: etiqueta12
+			},
+			options: {
+				responsive: true,
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Gastos efectuados desde: ' + fechaInicio + ' hasta: ' +  fechaFin
+				}
+			}
+		};
+	
+	
+	document.getElementById("canvas").remove();
+	var canvas = document.createElement("canvas");
+	canvas.id = "canvas"; 
+	document.getElementById("contenedorr").appendChild(canvas);
 	
 	var ctx = document.getElementById('canvas').getContext('2d');
-	window.myBar = new Chart(ctx, {
-		type: 'pie',
-		data:  {
-			datasets: [{
-				data: numero12,
-				backgroundColor: colores12,
-				label: 'Dataset 1'
-			}],
-			labels: etiqueta12
-		},
-		options: {
-			responsive: true,
-			legend: {
-				position: 'top',
-			},
-			title: {
-				display: true,
-				text: 'Gastos efectuados desde: ' + fechaInicio + ' hasta: ' +  fechaFin
-			}
-		}
-	});
+	window.myBar = new Chart(ctx,config);
+	
+	
+
+	
+
 }
 
 function drawGastos(gastos) {
