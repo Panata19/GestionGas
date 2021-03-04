@@ -8,7 +8,6 @@ $(document).ready(function() {
    
   
     
-    
     $('.delete').click(function(element) {
     	 var $el = $(this);
          var model = $el.data('model');
@@ -123,18 +122,18 @@ function report23(fechaInicio,fechaFin){
 	var colores12 = [];
 	var numero12 = [];
 	var etiqueta12 = [];
+	var  gastos = report12(fechaInicio,fechaFin);
 	
-	
-		var  gastos = report12(fechaInicio,fechaFin);
-		console.log(gastos);
-		for(var i in gastos){
-			colores12.push(getRandomColor());
-			numero12.push(gastos[i].gasto);
-			etiqueta12.push(gastos[i].categoria);
-		}
-		console.log(colores12);
-		console.log(numero12);
-		console.log(etiqueta12);
+	drawGastos(gastos);
+	console.log(gastos);
+	for(var i in gastos){
+		colores12.push(getRandomColor());
+		numero12.push(gastos[i].gasto);
+		etiqueta12.push(gastos[i].categoria);
+	}
+	console.log(colores12);
+	console.log(numero12);
+	console.log(etiqueta12);
 	
 
 	
@@ -195,36 +194,7 @@ function reportPDFGastos(){
 	var fechaInicio = $("#fechaInicio").val();
   	var fechaFin  = $("#fechaFin").val();
 
-	window.open(`/gastospdf/crear?since=${fechaInicio}&to=${fechaFin}`, '_blank')
-	// $.ajax({
-	// 	url : '/gastospdf/crear',
-	// 	method : 'GET',
-	// 	async: false,
-	// 	contentType: "application/json",
-    //     headers: { "X-CSRF-TOKEN": $("input[name='_csrf']").val() },
-	// 	success : function(response){
-	// 		console.log({response});
-	// 		var newBlob = new Blob([response], {type: "application/pdf"});
-
-    //         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-    //             window.navigator.msSaveOrOpenBlob(newBlob);
-    //             return;
-    //         }
-            
-    //         var data = window.URL.createObjectURL(newBlob);
-    //         var link = document.createElement('a');
-    //         link.href = data;
-    //         link.download = 'reporte.pdf';
-    //         link.click();
-    //         setTimeout(function(){
-    //             window.URL.revokeObjectURL(data);
-    //         }, 100);
-	// 	},
-	// 	error : function(err){
-	// 		console.log({err});
-	// 	}		
-	// });
-	
+	window.open(`/gastospdf/crear?since=${fechaInicio}&to=${fechaFin}`, '_blank');
 }
 
 
