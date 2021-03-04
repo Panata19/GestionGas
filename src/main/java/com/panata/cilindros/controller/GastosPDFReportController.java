@@ -44,10 +44,8 @@ public class GastosPDFReportController {
 	public @ResponseBody byte[] export(HttpServletResponse response, @RequestParam String since, @RequestParam String to) {
 		
 		response.setContentType("application/pdf");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
-        String currentDateTime = dateFormatter.format(new Date());
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=users_" + currentDateTime + ".pdf";
+        String headerValue = "attachment; filename=gastos_" + since + '_' + to + ".pdf";
         response.setHeader(headerKey, headerValue);
 		
         
@@ -80,9 +78,11 @@ public class GastosPDFReportController {
 
         PdfPTable table = new PdfPTable(2);
         
-        Paragraph p = new Paragraph("Reporte de Gastos", fontTitle);
+        Paragraph p = new Paragraph("Reporte de Gastos " + since + " - " + to, fontTitle);
         p.setAlignment(Paragraph.ALIGN_CENTER);
         document.add(p);
+        
+        document.add(new Paragraph(" "));
         
         PdfPCell cell = new PdfPCell();
         cell.setHorizontalAlignment(Cell.ALIGN_CENTER);
