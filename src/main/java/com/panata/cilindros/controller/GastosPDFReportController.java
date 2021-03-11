@@ -58,7 +58,7 @@ public class GastosPDFReportController {
 		
 		List<RptCategoriaGastos> gastos = todasGastos(since, to);
 		
-		Document document = new Document(PageSize.A4.rotate(), 5f, 5f, 5f, 5f);
+		Document document = new Document(PageSize.A4, 5f, 5f, 5f, 5f);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         
         PdfWriter.getInstance(document, stream);
