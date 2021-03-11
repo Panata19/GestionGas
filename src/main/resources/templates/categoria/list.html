@@ -42,11 +42,23 @@
 								
 								<td th:text="${i.nombre}"></td>
 								<td>
-									<button class="btn btn-danger delete" data-model="categoria" th:data-id="${i.idCategoria}">
-										<i class="fas fa-trash"></i>
-									</button>
-									<a class="btn btn-info" th:href="@{/categoria/update/} + ${i.idCategoria}">
-	                                    <i class="fas fa-edit"></i>
+															
+									
+											<button class="btn btn-danger btn-icon-split delete"
+											data-model="categoria" th:data-id="${i.idCategoria}">
+											 <span
+												class="icon text-white-50"><i class="fas fa-trash"></i>
+											</span> <span class="text">Eliminar</span>
+										</button>
+									
+									
+									<a class="btn btn-info btn-icon-split" th:href="@{/categoria/update/} + ${i.idCategoria}">
+	                                   
+	                                   <span
+												class="icon text-white-50">   <i class="fas fa-edit"></i>
+											</span> <span class="text">Editar</span>
+	                                   
+	                                 
 	                                </a>
 								</td>
 

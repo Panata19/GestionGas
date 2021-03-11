@@ -11,7 +11,6 @@ public interface IIngresos extends CrudRepository<Ingreso, Integer> {
 	public Float sumatoriaMensualIngreso(String  fe_inicial, String  fe_final);
 	
 	
-	
 	@Query(value="select SUM(cantidad) from ingreso where fecha = ?1 " , nativeQuery = true)
 	public Float sumatoriaDiaIngreso(String  fe_dia);
 }

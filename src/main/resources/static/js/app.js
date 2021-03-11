@@ -16,20 +16,29 @@ $(document).ready(function() {
          eliminar(model, id)
     })
     
+    
+    $('.modificar').click(function(element) {
+    	 var $el = $(this);
+         var model = $el.data('model');
+         var id = $el.data('id');
+
+         modificar(model, id)
+    })
+    
+    
+    
     let btnBuscar = document.getElementById('Reportef');
    
   	btnBuscar.addEventListener('click',(event) =>{
-  		event.preventDefault();
-  		 var fechaInicio = null;
-  	    var fechaFin = null;
+  	  event.preventDefault();
+  	  var fechaInicio = null;
+  	  var fechaFin = null;
   	  fechaInicio = $("#fechaInicio").val();
   	  fechaFin  = $("#fechaFin").val();
   	  console.log(fechaInicio,fechaFin);
   	 // report12(fechaInicio,fechaFin);
   	  // report23(fechaInicio,fechaFin,0);
   	  report23(fechaInicio,fechaFin);
-  		
-  		
   	});
   
   
@@ -79,6 +88,53 @@ function eliminar(modelo, id) {
 		})
 	
 }
+
+
+
+
+function modificar(modelo, id) {
+	Swal.fire({
+		  title: 'Se va a cambiar de estado el registro',
+		  text: "¿Seguro?, no podrás revertir esta operación",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonText: 'Si, cambiar',
+		  cancelButtonText: 'No, salir',
+		}).then((result) => {
+		  if (result.value) {        
+                $.ajax({
+                    url: '/' + modelo + '/update/' + id,
+                    method: 'GET',
+                    contentType: "application/json",
+                    headers: { "X-CSRF-TOKEN": $("input[name='_csrf']").val() },
+                    success: function (response) {
+                        Swal.fire({
+                            title: 'Registro ha cambiado correctamente',
+                            text: "Se ha cambiado de estado correctamente.",
+                            icon: 'success',
+                            confirmButtonText: 'Aceptar'
+                          }).then((result) => {
+                            window.location.reload();
+                          })
+                    },
+                    error: function (err) {
+                        Swal.fire({
+                            title: '¡Ha ocurrido un error!',
+                            text: "No se ha podido cambiar de estado el registro",
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                          })
+                    }
+                });
+		  }
+		})
+	
+}
+
+
+
+
+
 
 
 function report12(fechainicio,fechafin){	

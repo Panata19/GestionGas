@@ -17,7 +17,55 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-4 text-gray-800">Registro prestados de 45KG</h1>
+					<h1 class="h3 mb-4 text-gray-800">Cilindros prestados de 45KG</h1>
+
+					<div class="row">
+
+
+						<div class="col-xl-3 col-md-6 mb-4">
+							<div class="card border-left-danger border-bottom-danger shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div id="divID"
+												class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+												Prestado</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"
+												th:text="${rojo}"></div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-shopping-basket fa-2x text-gray-300"></i>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- card de ingresos -->
+						<div class="col-xl-3 col-md-6 mb-4">
+							<div class="card border-left-success border-bottom-success shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div id="divID"
+												class="text-xs font-weight-bold text-success text-uppercase mb-1">
+												Devuelto</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"
+												th:text="${verde}"></div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-undo-alt fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- tabla  
+					
 					<table class="table " >
 						<tr>
 								<th style="background-color:red;color:white;">1</th>
@@ -32,38 +80,46 @@
 								
 							</tr>
 					</table>
-<div class="table-responsive">
-					<table class="table table-hover" id="dataTable" width="100%"
-						cellspacing="0">
-						<thead>
-							<tr>
-								<th>Estao</th>
-								<th>Responsable</th>
-								<th>fech Prestado</th>
-								<th>fech Devuelto</th>
-								<th>Cantidad</th>
-								<th>Observaciones</th>
-								<th>Opc</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="i : ${prestados}">
+					-->
+					<div class="table-responsive">
+						<table class="table table-hover" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>Estao</th>
+									<th>Responsable</th>
+									<th>fech Prestado</th>
+									<th>fech Devuelto</th>
+									<th>Cantidad</th>
+									<th>Observaciones</th>
+									<th>Opc</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="i : ${prestados}">
 
-								<td th:text="${i.activo}"></td>
-								<td th:text="${i.responsable}"></td>
-								<td th:text="${i.fechaPrestado()}"></td>
-								<td th:text="${i.fechaDevuelto()}"></td>
-								<td th:text="${i.cantidad}"></td>
-								<td th:text="${i.observaciones}"></td>
-								<td>
-								<a class="btn btn-sm btn-success"
-								th:href="@{/prestado/update/} + ${i.idPrestados}"> <i class="fas fa-undo-alt"></i></a>
-								
-							</td>
-							</tr>
-						</tbody>
-					</table>
-</div>
+									<td th:text="${i.activo}"></td>
+									<td th:text="${i.responsable}"></td>
+									<td th:text="${i.fechaPrestado()}"></td>
+									<td th:text="${i.fechaDevuelto()}"></td>
+									<td th:text="${i.cantidad}"></td>
+									<td th:text="${i.observaciones}"></td>
+									<td>
+									
+
+										
+											<button class="btn btn-warning btn-icon-split modificar"
+											data-model="prestado" th:data-id="${i.idPrestados}">
+											 <span
+												class="icon text-white-50"><i class="fas fa-undo-alt"></i>
+											</span> <span class="text">Actualizar estado</span>
+										</button>
+
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 
 			</div>
@@ -73,26 +129,24 @@
 		</div>
 
 	</div>
-	
-	<script >
 
-$(document).ready(function(){ 
-    $('#dataTable td:first-child').each(function(){
-        if($(this).text() ==  1){
-            $(this).css('background','red');
-           
-            
-        }else{
-        	$(this).css('background','green');
-        }
-    });
-});
+	<script>
+		$(document).ready(function() {
+			$('#dataTable td:first-child').each(function() {
+				if ($(this).text() == 1) {
+					$(this).css('background', 'red');
 
-/*
-<a class="btn btn-sm btn-success"
+				} else {
+					$(this).css('background', 'green');
+				}
+			});
+		});
+
+		/*
+		 <a class="btn btn-sm btn-success"
 th:href="@{/prestado/update/} + ${i.idPrestados}"> <i class="fas fa-undo-alt"></i></a>*/
-</script>
-	
+	</script>
+
 
 
 
