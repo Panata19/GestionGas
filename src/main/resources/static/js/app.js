@@ -1,12 +1,13 @@
 
-
-
-
-
 $(document).ready(function() {
     console.log('start app');
-   
-  
+
+    window.onload = function(){
+		
+    	reportgraficodia();	
+		
+	}
+    
     
     $('.delete').click(function(element) {
     	 var $el = $(this);
@@ -25,7 +26,7 @@ $(document).ready(function() {
          modificar(model, id)
     })
     
-    
+ 
     
     let btnBuscar = document.getElementById('Reportef');
    
@@ -42,7 +43,11 @@ $(document).ready(function() {
   	});
   
   
-  //$('.Reportef').click()
+
+ 
+  		
+  	
+
     
     	
     
@@ -178,18 +183,38 @@ function report23(fechaInicio,fechaFin){
 	var colores12 = [];
 	var numero12 = [];
 	var etiqueta12 = [];
+	var ingreso = 0;
+	var totalGasto = 0;
+	var ganancia = 0;
 	var  gastos = report12(fechaInicio,fechaFin);
 	
-	drawGastos(gastos);
+	
 	console.log(gastos);
 	for(var i in gastos){
-		colores12.push(getRandomColor());
-		numero12.push(gastos[i].gasto);
-		etiqueta12.push(gastos[i].categoria);
+		
+		if((gastos.length-1) == i ){
+			ingreso = gastos[i].gasto;
+			gastos.splice(i, 1);
+		}else{
+			colores12.push(getRandomColor());
+			numero12.push(gastos[i].gasto);
+			totalGasto = totalGasto + gastos[i].gasto;
+			etiqueta12.push(gastos[i].categoria);
+			
+		}
 	}
-	console.log(colores12);
-	console.log(numero12);
-	console.log(etiqueta12);
+	
+	ganancia = ingreso - totalGasto; 
+	console.log("Ingreso = " + ingreso);
+	console.log("Gastos = " + totalGasto);
+	console.log(gastos);
+	drawGastos(gastos);
+	
+	document.getElementById("lingresos").innerHTML ="$ " + ingreso;
+	document.getElementById("lgastos").innerHTML = "$ " + totalGasto ;
+	document.getElementById("lganancias").innerHTML = "$ " + ganancia ;
+	
+	
 	
 
 	
@@ -259,5 +284,131 @@ $(function() {
     	dateFormat: 'yy-mm-dd'
     });
 });
+
+
+
+
+
+
+
+//Reporte del dia 
+//obtencion de los datos del dia 
+function reportediaactual(){	
+	
+	
+	
+	var matriculados = null;
+	$.ajax({
+		url : '/gastos/gastosdeldia',
+		method : 'GET',
+		async: false,
+		contentType: "application/json",
+      headers: { "X-CSRF-TOKEN": $("input[name='_csrf']").val() },
+		success : function(response){
+			console.log(response);
+			matriculados = response;
+		},
+		error : function(err){
+			console.log(err);
+		}		
+	});
+	return matriculados;
+	
+}
+
+
+//grafico de los gastos 
+
+function reportgraficodia(){
+
+
+	var color = Chart.helpers.color;
+
+	var colores12 = [];
+	var numero12 = [];
+	var etiqueta12 = [];
+	var  gastos = reportediaactual();
+	
+	for(var i in gastos){
+		colores12.push(getRandomColor());
+		numero12.push(gastos[i].gasto);
+		etiqueta12.push(gastos[i].categoria);
+	}
+	console.log(colores12);
+	console.log(numero12);
+	console.log(etiqueta12);
+	
+
+	
+	var config = {
+			type: 'bar',
+			data:  {
+				datasets: [{
+					data: [numero12[0]],
+					backgroundColor: ["#E61717"],
+					label: etiqueta12[0]
+					
+				},
+				{
+					data: [numero12[1]],
+					backgroundColor: ["#17E685"],
+					label: etiqueta12[1]
+					
+				},
+				{
+					data: [numero12[2]],
+					backgroundColor: ["#FCF000"],
+					label: etiqueta12[2]
+					
+				}],
+				labels: ["Flujo de dinero"]
+			},
+			options: {
+				responsive: true,
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: true,
+					text: 'Flujo de dinero de hoy' 
+				}
+			}
+		};
+	
+	
+	
+	
+	var ctx = document.getElementById('canvas1').getContext('2d');
+	window.myBar = new Chart(ctx,config);
+	
+	
+
+	
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

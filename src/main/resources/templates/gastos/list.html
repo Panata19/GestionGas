@@ -113,76 +113,94 @@
 						</div>
 					</div>
 
-
-					<div class="col-xl-8 col-lg-7">
-
-						<!-- Tablas card -->
-						<div class="card shadow mb-4">
-							<div class="card-header py-3" id="fecAct">
-								<h6 class="m-0 font-weight-bold text-primary">Informe del
-									d&iacute;a</h6>
-							</div>
-							<div class="card-body">
+					<!-- Tabla y grafico -->
+					<div class="row">
 
 
 
+						<div class="col-xl-8 col-lg-7">
 
-
-								<div class="table-responsive">
-									<table class="table " id="dataTable">
-										<thead>
-											<tr>
-
-
-											</tr>
-										</thead>
-										<tbody th:each="j : ${categorias}">
-
-
-											<tr bgcolor="#ddd">
-												<td scope="col" th:text="${j}"></td>
-												<td scope="col"></td>
-												<td scope="col"></td>
-												<td scope="col"></td>
-											</tr>
-
-
-											<tr th:each="i : ${gastos}"
-												th:if="${i.categoria.nombre == j}">
-
-												<td></td>
-												<td th:text="${i.nombre}"></td>
-												<td th:text="${i.cantidad}"></td>
-												<td>
-													<button class="btn btn-danger btn-icon-split delete"
-														data-model="gastos" th:data-id="${i.idGastos}">
-														<span class="icon text-white-50"> <i
-															class="fas fa-trash"></i>
-														</span> <span class="text">Eliminar</span>
-													</button> <a class="btn btn-info btn-icon-split"
-													th:href="@{/gastos/update/} + ${i.idGastos}"> <span
-														class="icon text-white-50"> <i class="fas fa-edit"></i>
-													</span> <span class="text">Editar</span>
-												</a>
-												</td>
-
-											</tr>
-										</tbody>
-									</table>
+							<!-- Tablas card -->
+							<div class="card shadow mb-3">
+								<div class="card-header py-3" id="fecAct">
+									<h6 class="m-0 font-weight-bold text-primary">Informe del
+										d&iacute;a</h6>
 								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table " id="dataTable">
+											<thead>
+												<tr>
+												</tr>
+											</thead>
+											<tbody th:each="j : ${categorias}">
+
+												<tr bgcolor="#ddd">
+													<td scope="col" th:text="${j}"></td>
+													<td scope="col"></td>
+													<td scope="col"></td>
+													<td scope="col"></td>
+												</tr>
+												<tr th:each="i : ${gastos}"
+													th:if="${i.categoria.nombre == j}">
+
+													<td></td>
+													<td th:text="${i.nombre}"></td>
+													<td th:text="${i.cantidad}"></td>
+													<td>
+														<button class="btn btn-danger btn-icon-split delete"
+															data-model="gastos" th:data-id="${i.idGastos}">
+															<span class="icon text-white-50"> <i
+																class="fas fa-trash"></i>
+															</span> <span class="text">Eliminar</span>
+														</button> <a class="btn btn-info btn-icon-split"
+														th:href="@{/gastos/update/} + ${i.idGastos}"> <span
+															class="icon text-white-50"> <i class="fas fa-edit"></i>
+														</span> <span class="text">Editar</span>
+													</a>
+													</td>
+
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+
+								</div>
+							</div>
 
 
 
 
 
 
+						</div>
 
 
 
+							
+						<!-- categoria -->
+						<div class="col-xl-4 col-lg-5">
+							<div class="card shadow mb-4">
+								<!-- Card Header - Dropdown -->
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Gr&aacute;fico </h6>
+								</div>
+								<!-- Card Body -->
+								<div class="card-body">
 
+									<canvas id="canvas1"
+										style="display: block; width: 654px; height: 327px;"
+										width="654" height="327" class="chartjs-render-monitor"></canvas>
 
+								</div>
 							</div>
 						</div>
+
+
+
+
+
 
 
 
@@ -192,7 +210,12 @@
 
 
 
+
+
+
+
 				</div>
+
 
 			</div>
 

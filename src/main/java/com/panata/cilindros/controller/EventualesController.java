@@ -122,7 +122,7 @@ public class EventualesController {
 			}
 						
 			if(result.hasErrors()) {
-				model.addAttribute("title", titulo);							
+				model.addAttribute("title", "Error al registar");							
 				return "eventual/form";				
 			}
 						

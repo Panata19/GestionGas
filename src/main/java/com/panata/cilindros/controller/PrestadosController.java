@@ -118,7 +118,7 @@ public class PrestadosController {
 			}
 						
 			if(result.hasErrors()) {
-				model.addAttribute("title", titulo);							
+				model.addAttribute("title", "Error al registar");							
 				return "prestado/form";				
 			}
 						
