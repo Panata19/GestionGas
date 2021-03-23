@@ -143,13 +143,15 @@ public class GastosController {
 				titulo = "Actualizado correctamente";
 			}
 			
+			
+			
 			if(categoria == null) {
 				flash.addFlashAttribute("error", "No se ha encontrado la categoria");
 				return "redirect:/gastos/create";
 			}
 						
 			if(result.hasErrors()) {
-				model.addAttribute("title", titulo);	
+				model.addAttribute("title", "Error al registrar");	
 				model.addAttribute("categorias", categorias);
 				System.out.println(result.getAllErrors());
 				return "gastos/form";				
@@ -164,7 +166,7 @@ public class GastosController {
 		catch(Exception ex) {
 			flash.addFlashAttribute("error", ex.getMessage());
 			ex.printStackTrace();
-			return "redirect:/gastos/create3";
+			return "redirect:/gastos/create";
 		}				
 		return "redirect:/gastos/list";
 	}	
@@ -208,6 +210,14 @@ public class GastosController {
 				reporte.add(datos);
 				
 			}
+			
+			Float totalIngresos = srvIngreso.sumatoriaMensualIngreso(fecha1, fecha2);
+			
+			RptCategoriaGastos datos = new RptCategoriaGastos();
+			datos.setCategoria("Ingresos de la fecha");
+			datos.setGasto(totalIngresos);
+			reporte.add(datos);
+			
 			return reporte;
 		} catch (Exception ex) {
 			System.out.println(ex.getMessage());
@@ -215,6 +225,50 @@ public class GastosController {
 		}		
 	}
 	
+	
+	
+	
+	//Cantidad de los gastos ganancias y ingresos del dia 
+	@GetMapping(value = "/gastosdeldia", produces="application/json")
+	public @ResponseBody List<RptCategoriaGastos> gastosdeldia( Model model) {				
+		try {	
+			
+			Calendar diaActual = Calendar.getInstance();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");	
+			
+			Float gastos = srvGastos.sumatoriaDiaGastos(sdf.format(diaActual.getTime()));
+			Float ingresos = srvIngreso.sumatoriaDiaIngreso(sdf.format(diaActual.getTime()));
+			Float ganancias = ingresos - gastos;
+			
+			
+			List<RptCategoriaGastos> reporte = new ArrayList<RptCategoriaGastos>();
+			
+				RptCategoriaGastos datos = new RptCategoriaGastos();
+				datos.setCategoria("gasto");
+				datos.setGasto(gastos);
+				reporte.add(datos);
+				
+				
+				RptCategoriaGastos datos1 = new RptCategoriaGastos();
+				datos1.setCategoria("ingresos");
+				datos1.setGasto(ingresos);
+				reporte.add(datos1);
+				
+				
+				RptCategoriaGastos datos2 = new RptCategoriaGastos();
+				datos2.setCategoria("ganancias");
+				datos2.setGasto(ganancias);
+				reporte.add(datos2);
+				
+				
+			return reporte;
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			return null;
+		}		
+	}
+	
+
 	
 	
 	

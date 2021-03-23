@@ -11,6 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,6 +39,7 @@ public class Ingreso implements Serializable {
 	private Calendar Fecha;
 	
 	@Column(name = "cantidad")
+	@Min(1)
 	private Float Cantidad;
 
 	public Ingreso() {

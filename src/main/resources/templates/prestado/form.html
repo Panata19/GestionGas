@@ -38,8 +38,8 @@
 
 							</div>
 							<div class="col-sm-6">
-								<input type="text" class="form-control form-control-user datepicker"
-									th:field="*{fecha_prestado}" id="exampleLastName" required>
+								<input type="text" id="fechaActual" class="form-control form-control-user datepicker"
+									th:field="*{fecha_prestado}"  required>
 							</div>
 						</div>
 
@@ -60,7 +60,7 @@
 
 							</div>
 							<div class="col-sm-6">
-								<select class="form-control " th:field="*{tipo}">
+								<select class="form-control " th:field="*{tipo}"  required>
 									<option value=1>15 kg</option>
 									<option value=2>45 kg</option>
 								</select>
@@ -95,6 +95,20 @@
 	</div>
 
 
+<script>
+window.onload = function(){
+	  var fecha = new Date(); //Fecha actual
+	  var mes = fecha.getMonth()+1; //obteniendo mes
+	  var dia = fecha.getDate(); //obteniendo dia
+	  var ano = fecha.getFullYear(); //obteniendo a�o
+	  if(dia<10)
+	    dia='0'+dia; //agrega cero si el menor de 10
+	  if(mes<10)
+	    mes='0'+mes //agrega cero si el menor de 10
+	  document.getElementById('fechaActual').value=ano+"-"+mes+"-"+dia;
+	}
+
+</script>
 
 
 </body>

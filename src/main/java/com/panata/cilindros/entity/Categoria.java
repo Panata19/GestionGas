@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +34,8 @@ public class Categoria implements Serializable {
 	private Integer idCategoria;
 	
 	@Column(name = "nombre")
+	@NotEmpty
+	@Size(max=60)
 	private String Nombre;
 	
 	

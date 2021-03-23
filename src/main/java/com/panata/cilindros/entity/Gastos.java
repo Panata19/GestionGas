@@ -14,6 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.data.annotation.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,13 +40,18 @@ public class Gastos implements Serializable {
 	private Integer idGastos;
 	
 	@Column(name = "nombre")
+	@NotEmpty
+	@Size(max=60)
 	private String Nombre;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	@Column(name = "Fecha")
+	
 	private Calendar Fecha;
 	
 	@Column(name = "cantidad")
+	@Min(1)
+	//@DecimalMin("1.00") 
 	private Float Cantidad;
 	
 	@JoinColumn(name="fk_categoria", referencedColumnName="pk_categoria")
