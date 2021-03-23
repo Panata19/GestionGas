@@ -283,8 +283,9 @@ function reportPDFGastos(){
 
 $(function() {
     $(".datepicker").datepicker({
-    	dateFormat: 'yy-mm-dd'
+    	dateFormat: 'yy-mm-dd',
     });
+    $('.datepicker').datepicker("setDate", new Date() );
 });
 
 
@@ -373,7 +374,14 @@ function reportgraficodia(){
 				title: {
 					display: true,
 					text: 'Flujo de dinero de hoy' 
-				}
+				},
+				scales: {
+			        yAxes: [{
+			            ticks: {
+			                beginAtZero: true
+			            }
+			        }]
+			    },
 			}
 		};
 	
