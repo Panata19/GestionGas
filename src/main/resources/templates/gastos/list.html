@@ -28,7 +28,7 @@
 
 
 
-						<div class="dropdown no-arrow mb-4">
+						<div class="dropdown no-arrow mb-4 d-print-none">
 							<button class="btn btn-success dropdown-toggle" type="button"
 								id="dropdownMenuButton" data-toggle="dropdown"
 								aria-haspopup="true" aria-expanded="false">
@@ -36,14 +36,15 @@
 
 							</button>
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<a class="dropdown-item" href="/ingreso/create">Nuevo</a> <a
-									class="dropdown-item" href="/ingreso/list">administraci&oacute;n</a>
-
+								<a class="dropdown-item" href="/ingreso/create">Nuevo</a> 
+								<a class="dropdown-item" href="/ingreso/list">administraci&oacute;n</a>
 							</div>
+						
+						
 
-							<a href="/gastos/create" class="btn btn-primary"><i
-								class="far fa-money-bill-alt"></i> Nuevo gasto </a> <a
-								href="/categoria/list" class="btn btn-warning"><i
+							<a href="/gastos/create" class="btn btn-primary d-print-none"><i
+								class="far fa-money-bill-alt"></i> Nuevo gasto </a> 
+								<a href="/categoria/list" class="btn btn-warning d-print-none"><i
 								class="fas fa-folder"></i> Categoria </a>
 					</h1>
 
@@ -222,7 +223,7 @@
 			var fecha = new Date(); //Fecha actual
 			var mes = fecha.getMonth() + 1; //obteniendo mes
 			var dia = fecha.getDate(); //obteniendo dia
-			var ano = fecha.getFullYear(); //obteniendo año
+			var ano = fecha.getFullYear(); //obteniendo aï¿½o
 			if (dia < 10)
 				dia = '0' + dia; //agrega cero si el menor de 10
 			if (mes < 10)

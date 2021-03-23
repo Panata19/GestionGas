@@ -247,6 +247,8 @@ function drawGastos(gastos) {
 }
 
 function reportPDFGastos(){	
+	print();
+	return;
 	var fechaInicio = $("#fechaInicio").val();
   	var fechaFin  = $("#fechaFin").val();
 
