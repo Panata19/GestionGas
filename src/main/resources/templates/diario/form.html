@@ -18,7 +18,13 @@
 
 					<!-- Page Heading -->
 					<h1 class="h3 mb-4 text-gray-800">Control Diario</h1>
-
+					<div th:if="${errors}" class="alert alert-danger">
+						<ul class="mb-0">	
+							<li th:each="error: ${errors}">
+							    <span th:text="${error.getField() + ' ' + error.getDefaultMessage()}"></span>
+							</li>
+						</ul>
+					</div>
 					<form class="user" th:action="@{/diario/save}"
 						th:object="${diario}" method="post">
 						

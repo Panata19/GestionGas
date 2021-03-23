@@ -95,6 +95,7 @@ public class IngresosController {
 			}
 						
 			if(result.hasErrors()) {
+				model.addAttribute("errors", result.getFieldErrors());
 				model.addAttribute("title", "Error al registrar");							
 				return "ingreso/form";				
 			}

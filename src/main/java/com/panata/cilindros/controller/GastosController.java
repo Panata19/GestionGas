@@ -151,6 +151,7 @@ public class GastosController {
 			}
 						
 			if(result.hasErrors()) {
+				model.addAttribute("errors", result.getFieldErrors());
 				model.addAttribute("title", "Error al registrar");	
 				model.addAttribute("categorias", categorias);
 				System.out.println(result.getAllErrors());

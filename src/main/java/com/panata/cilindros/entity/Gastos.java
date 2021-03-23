@@ -41,12 +41,11 @@ public class Gastos implements Serializable {
 	
 	@Column(name = "nombre")
 	@NotEmpty
-	@Size(max=60)
+	@Size(min=3, max=60)
 	private String Nombre;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")	
 	@Column(name = "Fecha")
-	
 	private Calendar Fecha;
 	
 	@Column(name = "cantidad")

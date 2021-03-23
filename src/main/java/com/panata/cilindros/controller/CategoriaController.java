@@ -3,6 +3,8 @@
 import java.util.Calendar;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -82,9 +84,7 @@ public class CategoriaController {
 	
 	
 	@PostMapping(value="/save") 
-	public String save(@Validated Categoria categoria, BindingResult result, Model model,
-			
-			SessionStatus status, RedirectAttributes flash) {
+	public String save(@Valid Categoria categoria, BindingResult result, Model model, RedirectAttributes flash) {
 		try {
 			
 			String message = "Categoria agregado correctamente";
@@ -96,14 +96,13 @@ public class CategoriaController {
 			}
 						
 			if(result.hasErrors()) {
-				model.addAttribute("title", titulo);							
+				model.addAttribute("title", titulo);
+				model.addAttribute("errors", result.getAllErrors());
 				return "categoria/form";				
 			}
 						
 
-			srvCategoria.save(categoria);	
-			status.setComplete();
-			flash.addFlashAttribute("success", message);
+			srvCategoria.save(categoria);
 		}
 		catch(Exception ex) {
 			flash.addFlashAttribute("error", ex.getMessage());

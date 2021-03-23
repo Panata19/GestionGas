@@ -119,6 +119,7 @@ public class DiarioController {
 			}
 
 			if (result.hasErrors()) {
+				model.addAttribute("errors", result.getFieldErrors());
 				model.addAttribute("title", titulo);
 				return "diario/form";
 			}

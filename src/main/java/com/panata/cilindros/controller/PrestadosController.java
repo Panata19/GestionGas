@@ -3,6 +3,8 @@ package com.panata.cilindros.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -104,7 +106,7 @@ public class PrestadosController {
 	
 
 	@PostMapping(value="/save") 
-	public String save(@Validated prestados prestado, BindingResult result, Model model,
+	public String save(@Valid prestados prestado, BindingResult result, Model model,
 			
 			SessionStatus status, RedirectAttributes flash) {
 		try {
@@ -112,12 +114,15 @@ public class PrestadosController {
 			String message = "Cilindro prestado correctamente";
 			String titulo = "Nuevo prestamos o pedido presttual";
 			
+			model.addAttribute("prestado", prestado);
+			
 			if(prestado.getIdPrestados() != null) {
 				message = "actualizada correctamente";
 				titulo = "Actualizado correctamente";
 			}
 						
 			if(result.hasErrors()) {
+				model.addAttribute("errors", result.getFieldErrors());
 				model.addAttribute("title", "Error al registar");							
 				return "prestado/form";				
 			}

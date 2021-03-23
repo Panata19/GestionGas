@@ -13,8 +13,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Null;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "prestados")
@@ -42,6 +47,7 @@ public class prestados implements Serializable {
 	private Calendar fecha_devuelto;
 
 	@Column(name = "cantidad")
+	@Min(1)
 	private int cantidad;
 
 	@Column(name = "observaciones")
@@ -54,6 +60,8 @@ public class prestados implements Serializable {
 	private int activo;
 
 	@Column(name = "responsable")
+	@NotNull
+	@Size(min=3, max=50)
 	private String responsable;
 
 	public String getResponsable() {

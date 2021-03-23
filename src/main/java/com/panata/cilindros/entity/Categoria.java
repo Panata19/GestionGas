@@ -35,7 +35,7 @@ public class Categoria implements Serializable {
 	
 	@Column(name = "nombre")
 	@NotEmpty
-	@Size(max=60)
+	@Size(min=3, max=30)
 	private String Nombre;
 	
 	

@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -45,6 +47,8 @@ public class eventuales implements Serializable {
 	private Calendar fecha_devolucion;
 	
 	@Column(name="responsable")
+	@Size(min=3, max=50)
+	@NotEmpty
 	private String responsable;
 	
 	public String getResponsable() {
