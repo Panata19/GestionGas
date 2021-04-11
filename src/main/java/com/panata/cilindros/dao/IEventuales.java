@@ -22,8 +22,8 @@ public interface IEventuales extends CrudRepository <eventuales, Integer>{
 	@Query(value="SELECT SUM(cantidad) FROM eventual WHERE tipo = 2 and estado=1 " , nativeQuery = true)
 	public Integer restaPrestadoEventual();
 
-	
-	@Query(value="SELECT * FROM eventual WHERE tipo = ?1 and estado=1 " , nativeQuery = true)
+	//realizo cambio 
+	@Query(value="SELECT * FROM eventual WHERE estado=1 and tipo =?1 " , nativeQuery = true)
 	public List<eventuales> findBytipoEventuales(int tipo);
 	
 

@@ -146,8 +146,8 @@ public class DiarioController {
 				diar.setPedidoseven_cantidad(0);
 
 			// Guardar Nombres de todos
-			List<eventuales> evenpedido = srvEventuales.findBytipo(1);
-			List<eventuales> evenprestado = srvEventuales.findBytipo(2);
+			List<eventuales> evenpedido = srvEventuales.findBytipoEventuales(1);
+			List<eventuales> evenprestado = srvEventuales.findBytipoEventuales(2);
 			List<prestados> negocio = srvPrestado.findBytipoPrestados();
 			String per1 = "";
 			String per2 = "";
